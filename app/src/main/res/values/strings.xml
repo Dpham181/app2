@@ -3,4 +3,7 @@
     <string name="shr_hint_username">Username</string>
     <string name="shr_hint_password">Password</string>
     <string name="Rbutton">Register</string>
+    <string name="unelevated_button_label_enabled">Login</string>
+    <string name="LogButton">Login</string>
+    <string name="regbutton">Register</string>
 </resources>

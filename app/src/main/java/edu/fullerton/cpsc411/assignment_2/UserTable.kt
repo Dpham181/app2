@@ -12,7 +12,13 @@ object UserTable {
            const val COLUMN_PASSWORD = "password"
         }
     }
-
+    class MoiveEntry : BaseColumns {
+        companion object {
+            const val TABLE_Moive = "Moive"
+            const val COLUMN_1 = "Title"
+            const val COLUMN_2 = "Description"
+        }
+    }
 
 }
 

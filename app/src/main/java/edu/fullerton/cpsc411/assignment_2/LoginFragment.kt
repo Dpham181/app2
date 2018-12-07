@@ -12,6 +12,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import edu.fullerton.cpsc411.assignment_2.databinding.FragmentLoginBinding
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
 
+    private val userModel by lazy { ViewModelProviders.of(this).get(UserModel::class.java) }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +30,7 @@ class LoginFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val binding: FragmentLoginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-        binding.usermodel = ViewModelProviders.of(this).get(UserModel::class.java)
+        binding.usermodel = userModel
 
         // using root for getting the fragment view
         val fragmentView = binding.root
@@ -40,26 +42,25 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textInputLayout.visibility = INVISIBLE
-        textInputLayout2.visibility = INVISIBLE
-        register.visibility = INVISIBLE
-        Handler().postDelayed({
-
-            logo.visibility = INVISIBLE
-            textInputLayout.visibility = VISIBLE
-            textInputLayout2.visibility = VISIBLE
-            register.visibility = VISIBLE
-
-
-        }, 3000)
-
-
 
        val db = MovieDbHelper(this.activity?.applicationContext!!)
 
         register.setOnClickListener(){
-           db.insertUser()
-            db.close()
+
+            var username = ""
+            var password =""
+            val CurrentUser = Observer<String>{ LiveUser ->
+                username = LiveUser
+            }
+            val Currentuserpass= Observer<String>{ LivePass ->
+                password = LivePass
+            }
+            userModel.username.observe(this, CurrentUser)
+            userModel.password.observe(this, Currentuserpass)
+
+            db.insertNewUser(username,password)
+
+
         }
 
     }
