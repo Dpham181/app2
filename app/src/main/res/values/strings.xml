@@ -6,4 +6,5 @@
     <string name="unelevated_button_label_enabled">Login</string>
     <string name="LogButton">Login</string>
     <string name="regbutton">Register</string>
+    <string name="title_activity_useractivity">useractivity</string>
 </resources>

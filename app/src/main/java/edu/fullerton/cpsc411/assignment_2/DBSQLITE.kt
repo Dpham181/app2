@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 
 class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
@@ -16,10 +17,9 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         Log.d("table","created");
 
     }
+
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
-        db.execSQL(SQL_DELETE_ENTRIES)
-        db.execSQL(SQL_CREATE_ENTRIES2)
 
         onCreate(db)
     }
@@ -58,7 +58,27 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
         return true
     }
+    fun loginUser(username:String, password:String): Boolean {
 
+        val db = readableDatabase
+        Log.d("login","testing");
+        val cursor = db.rawQuery("SELECT * FROM  " + UserTable.UserEntry.TABLE_NAME + " WHERE "  + UserTable.UserEntry.COLUMN_USERNAME + " = '" + username + "'" , null)
+        cursor?.moveToFirst()
+        if( password == cursor.getString(cursor.getColumnIndex(UserTable.UserEntry.COLUMN_PASSWORD))){
+            return true
+            Log.d("PASS c", "PASS WORD CORRECT")
+            db.close()
+
+        }else
+        {
+            db.close()
+
+            return false
+            Log.d("PASS c", "PASS WORD INCORRECT")
+
+        }
+
+    }
     companion object {
         // If you change the database schema, you must increment the database version.
         const val DATABASE_VERSION = 1
@@ -71,7 +91,6 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                         "${UserTable.UserEntry.COLUMN_USERNAME} TEXT," +
                         "${UserTable.UserEntry.COLUMN_PASSWORD} TEXT)"
 
-        private const val SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS ${UserTable.UserEntry.TABLE_NAME}"
 
         private const val SQL_CREATE_ENTRIES2 =
                 "CREATE TABLE ${UserTable.MoiveEntry.TABLE_Moive} (" +
@@ -79,7 +98,6 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                         "${UserTable.MoiveEntry.COLUMN_1} TEXT," +
                         "${UserTable.MoiveEntry.COLUMN_2} TEXT)"
 
-        private const val SQL_DELETE_ENTRIES2 = "DROP TABLE IF EXISTS ${UserTable.MoiveEntry.TABLE_Moive}"
 
 
 

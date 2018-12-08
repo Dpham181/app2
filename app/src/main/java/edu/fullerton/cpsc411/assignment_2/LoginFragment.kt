@@ -1,15 +1,12 @@
 package edu.fullerton.cpsc411.assignment_2
 
 
-import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -43,25 +40,40 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-       val db = MovieDbHelper(this.activity?.applicationContext!!)
 
+        var username = ""
+        val db = MovieDbHelper(this.activity?.applicationContext!!)
+        var password =""
+        val CurrentUser = Observer<String>{ LiveUser ->
+            username = LiveUser
+        }
+        val Currentuserpass= Observer<String>{ LivePass ->
+            password = LivePass
+        }
+        userModel.username.observe(this, CurrentUser)
+        userModel.password.observe(this, Currentuserpass)
         register.setOnClickListener(){
 
-            var username = ""
-            var password =""
-            val CurrentUser = Observer<String>{ LiveUser ->
-                username = LiveUser
-            }
-            val Currentuserpass= Observer<String>{ LivePass ->
-                password = LivePass
-            }
-            userModel.username.observe(this, CurrentUser)
-            userModel.password.observe(this, Currentuserpass)
 
             db.insertNewUser(username,password)
 
 
         }
+
+        loginB.setOnClickListener(){
+            if (db.loginUser(username,password)){
+
+                val intent =  Intent(activity, useractivity::class.java)
+                startActivity(intent) //call asynchronous
+           }
+            else
+            {
+                Log.d("soemthingwe", "teststs")
+            }
+        }
+
+
+
 
     }
 
