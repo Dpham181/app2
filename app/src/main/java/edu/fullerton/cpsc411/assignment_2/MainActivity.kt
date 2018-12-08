@@ -12,6 +12,13 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val db = MovieDbHelper.getInstance(this)
+
+        db.insertNewMoive("Moive1" ,"test1")
+
+        db.insertNewMoive("Moive2" ,"test2")
+        db.insertNewMoive("Moive 3" ,"test3")
+        db.AllMoive()
 
         if (savedInstanceState == null) {
 

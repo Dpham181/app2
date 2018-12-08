@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import edu.fullerton.cpsc411.assignment_2.databinding.FragmentLoginBinding
 import kotlinx.android.synthetic.main.fragment_login.*
 
+const val comefrom= "edu.fullerton.cpsc411.assignment_2.LoginFragment"
 
 class LoginFragment : Fragment() {
 
@@ -62,8 +63,11 @@ class LoginFragment : Fragment() {
 
         loginB.setOnClickListener(){
             if (db.loginUser(username,password)){
+                // start new activity and sent the username to useractivity using put extra
+                val intent =  Intent(activity, useractivity::class.java).apply {
+                    putExtra(comefrom, username)
+                }
 
-                val intent =  Intent(activity, useractivity::class.java)
                 startActivity(intent) //call asynchronous
            }
             else

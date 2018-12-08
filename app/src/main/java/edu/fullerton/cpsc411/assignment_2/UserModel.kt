@@ -32,6 +32,7 @@ open class UserModel() : ViewModel(), Observable {
     val password: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
+
     fun UsernameTextChanged(s: CharSequence) {
 
 

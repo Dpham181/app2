@@ -1,5 +1,6 @@
 package edu.fullerton.cpsc411.assignment_2
 
+import android.content.ClipDescription
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -26,45 +27,38 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
     override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         onUpgrade(db, oldVersion, newVersion)
     }
-    /*
-    private var sInstance: MovieDbHelper? = null
-
-    @Synchronized
-    fun getInstance(context: Context): MovieDbHelper {
 
 
-        if (sInstance == null) {
-            sInstance = MovieDbHelper(context.applicationContext)
-        }
-        return sInstance as MovieDbHelper
-    }
-
-    */
+    // INSERT TO TABLE USER IN SQLITE
     fun insertNewUser(username:String, password:String): Boolean {
 
         val db = writableDatabase
-        Log.d("Insert Working","testing");
+        Log.d("Insert Working","one row effected");
 
         // Create a new map of values, where column names are the keys
         val values = ContentValues().apply {
-            put(UserTable.UserEntry.COLUMN_USERNAME,username)
-            put(UserTable.UserEntry.COLUMN_PASSWORD, password)
+            put(Tables.User.COLUMN_1,username)
+            put(Tables.User.COLUMN_2, password)
 
         }
 
-        db?.insert(UserTable.UserEntry.TABLE_NAME, null, values);
+        db?.insert(Tables.User.TABLE_USER, null, values);
 
         db.close()
 
         return true
     }
+
+    // LOGIN CHECK IF PASSWORD IS CORRECT FROM SQLITE DATABASE
     fun loginUser(username:String, password:String): Boolean {
 
         val db = readableDatabase
         Log.d("login","testing");
-        val cursor = db.rawQuery("SELECT * FROM  " + UserTable.UserEntry.TABLE_NAME + " WHERE "  + UserTable.UserEntry.COLUMN_USERNAME + " = '" + username + "'" , null)
+        val cursor = db.rawQuery("SELECT * FROM  " + Tables.User.TABLE_USER + " WHERE "  + Tables.User.COLUMN_1 + " = '" + username + "'" , null)
+
+
         cursor?.moveToFirst()
-        if( password == cursor.getString(cursor.getColumnIndex(UserTable.UserEntry.COLUMN_PASSWORD))){
+        if( password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))){
             return true
             Log.d("PASS c", "PASS WORD CORRECT")
             db.close()
@@ -79,6 +73,47 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         }
 
     }
+    // all moive in database
+    fun insertNewMoive(title:String, description:String): Boolean {
+
+        val db = writableDatabase
+        Log.d("Insert Working","one row effected");
+
+        // Create a new map of values, where column names are the keys
+        val values = ContentValues().apply {
+            put(Tables.Moive.COLUMN_1,title)
+            put(Tables.Moive.COLUMN_2, description)
+
+        }
+
+        db?.insert(Tables.Moive.TABLE_MOIVE, null, values);
+
+        db.close()
+
+        return true
+    }
+    // function get all moive in the database
+
+    fun AllMoive(){
+
+        val db = readableDatabase
+        Log.d("ALL MOIVES ","testing");
+        val cursor = db.rawQuery("SELECT * FROM  " + Tables.Moive.TABLE_MOIVE  , null)
+        val Moives =  ArrayList<MovieModel>()
+        with(cursor) {
+            while (moveToNext()) {
+
+
+                val title = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_1))
+                val des = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_2))
+                Moives.add(MovieModel(title,des))
+            }
+        }
+
+        Log.d("moives", Moives.toString())
+
+    }
+
     companion object {
         // If you change the database schema, you must increment the database version.
         const val DATABASE_VERSION = 1
@@ -86,22 +121,32 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
 
         private const val SQL_CREATE_ENTRIES =
-                "CREATE TABLE ${UserTable.UserEntry.TABLE_NAME} (" +
+                "CREATE TABLE ${Tables.User.TABLE_USER} (" +
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
-                        "${UserTable.UserEntry.COLUMN_USERNAME} TEXT," +
-                        "${UserTable.UserEntry.COLUMN_PASSWORD} TEXT)"
+                        "${Tables.User.COLUMN_1} TEXT," +
+                        "${Tables.User.COLUMN_2} TEXT)"
 
 
         private const val SQL_CREATE_ENTRIES2 =
-                "CREATE TABLE ${UserTable.MoiveEntry.TABLE_Moive} (" +
+                "CREATE TABLE ${Tables.Moive.TABLE_MOIVE} (" +
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
-                        "${UserTable.MoiveEntry.COLUMN_1} TEXT," +
-                        "${UserTable.MoiveEntry.COLUMN_2} TEXT)"
+                        "${Tables.Moive.COLUMN_1} TEXT," +
+                        "${Tables.Moive.COLUMN_2} TEXT)"
 
 
 
 
+        private var sInstance: MovieDbHelper? = null
 
+        @Synchronized
+        fun getInstance(context: Context): MovieDbHelper {
+
+
+            if (sInstance == null) {
+                sInstance = MovieDbHelper(context.applicationContext)
+            }
+            return sInstance as MovieDbHelper
+        }
 
     }
 }

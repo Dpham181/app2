@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+
+        android:id = "@+id/Profile"
+        android:title = "@string/Profile"
+        app:showAsAction="always|withText"
+        android:icon="@drawable/profile"
+        />
+
+    <item
+
+        android:id = "@+id/Cart"
+        android:title = "@string/Cart"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/cart"
+        />
+
+    <item
+
+        android:id = "@+id/Contact"
+        android:title = "@string/Contact"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/support"
+
+        />
+
+
+    <item
+
+        android:id = "@+id/Location"
+        android:title = "@string/Location"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/location"
+        />
+
+
+
+</menu>

@@ -2,19 +2,19 @@ package edu.fullerton.cpsc411.assignment_2
 
 import android.provider.BaseColumns
 
-object UserTable {
+object Tables {
 
     /* Inner class that defines the table contents */
-    class UserEntry : BaseColumns {
+    class User : BaseColumns {
         companion object {
-            const val TABLE_NAME = "users"
-            const val COLUMN_USERNAME = "username"
-           const val COLUMN_PASSWORD = "password"
+            const val TABLE_USER = "users"
+            const val COLUMN_1 = "username"
+           const val COLUMN_2 = "password"
         }
     }
-    class MoiveEntry : BaseColumns {
+    class Moive : BaseColumns {
         companion object {
-            const val TABLE_Moive = "Moive"
+            const val TABLE_MOIVE = "Moive"
             const val COLUMN_1 = "Title"
             const val COLUMN_2 = "Description"
         }
