@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">assignment_2</string>
-    <string name="shr_hint_username">Username</string>
-    <string name="shr_hint_password">Password</string>
+    <string name="password">Password</string>
     <string name="Rbutton">Register</string>
     <string name="unelevated_button_label_enabled">Login</string>
     <string name="LogButton">Login</string>
@@ -11,4 +10,5 @@
     <string name="Contact">Contact Us</string>
     <string name="Location">Location</string>
     <string name="Cart">Cart</string>
+    <string name="email">Email</string>
 </resources>

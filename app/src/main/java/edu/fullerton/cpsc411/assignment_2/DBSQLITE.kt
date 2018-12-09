@@ -1,14 +1,16 @@
 package edu.fullerton.cpsc411.assignment_2
 
-import android.content.ClipDescription
 import android.content.ContentValues
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
+
+
+// https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase
+
 
 class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
@@ -42,11 +44,21 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
         }
 
-        db?.insert(Tables.User.TABLE_USER, null, values);
+           val newrow =  db?.insert(Tables.User.TABLE_USER, null, values);
+        if(newrow?.toInt() == -1 ) {
+            Log.d("new row",newrow?.toInt().toString() )
 
-        db.close()
+            db.close()
+            return false
+        }else
+        {
+            db.close()
 
-        return true
+            return true
+        }
+
+
+
     }
 
     // LOGIN CHECK IF PASSWORD IS CORRECT FROM SQLITE DATABASE
@@ -111,7 +123,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         }
 
         Log.d("moives", Moives.toString())
-
+        db.close()
     }
 
     companion object {
@@ -123,14 +135,14 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         private const val SQL_CREATE_ENTRIES =
                 "CREATE TABLE ${Tables.User.TABLE_USER} (" +
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
-                        "${Tables.User.COLUMN_1} TEXT," +
+                        "${Tables.User.COLUMN_1} TEXT NOT NULL UNIQUE," +
                         "${Tables.User.COLUMN_2} TEXT)"
 
 
         private const val SQL_CREATE_ENTRIES2 =
                 "CREATE TABLE ${Tables.Moive.TABLE_MOIVE} (" +
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
-                        "${Tables.Moive.COLUMN_1} TEXT," +
+                        "${Tables.Moive.COLUMN_1} TEXT UNIQUE," +
                         "${Tables.Moive.COLUMN_2} TEXT)"
 
 

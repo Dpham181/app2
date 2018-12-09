@@ -1,6 +1,7 @@
 package edu.fullerton.cpsc411.assignment_2
 
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -41,10 +43,32 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
+        // define var variable to get livedata from model
         var username = ""
-        val db = MovieDbHelper(this.activity?.applicationContext!!)
         var password =""
+
+
+
+        // Creating a alert Dialog
+        // https://developer.android.com/guide/topics/ui/dialogs#kotlin
+        val alertDialog: AlertDialog? = activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.apply {
+                setTitle("Thanks For Join Us")
+                setMessage("Your Account Successfully Created")
+            }
+            // Set other dialog properties
+
+            // Create the AlertDialog
+            builder.create()
+        }
+
+
+
+        // open SQLITE in this activity
+        val db = MovieDbHelper.getInstance(this.activity!!)
+
+        // GETTING TWO LIVEDATA FROM USER VIEWMODEL and assign to var defined
         val CurrentUser = Observer<String>{ LiveUser ->
             username = LiveUser
         }
@@ -53,10 +77,22 @@ class LoginFragment : Fragment() {
         }
         userModel.username.observe(this, CurrentUser)
         userModel.password.observe(this, Currentuserpass)
-        register.setOnClickListener(){
 
 
-            db.insertNewUser(username,password)
+
+        // REGISTER BUUTON  -> INSERT USERNAME AND PASSWORD
+
+        register.setOnClickListener() {
+
+
+           if( db.insertNewUser(username,password)) {
+               alertDialog?.show()
+
+           }
+            else {
+               alertDialog?.setMessage("there is something wrong")
+               alertDialog?.show()
+           }
 
 
         }
@@ -72,7 +108,8 @@ class LoginFragment : Fragment() {
            }
             else
             {
-                Log.d("soemthingwe", "teststs")
+                alertDialog?.setMessage("SomeThing Wrong With Your Username OR Password")
+                alertDialog?.show()
             }
         }
 

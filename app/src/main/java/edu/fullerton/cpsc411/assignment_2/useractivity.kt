@@ -12,6 +12,9 @@ class useractivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_useractivity)
+
+
+         // https://developer.android.com/reference/kotlin/android/widget/Toolbar
         setSupportActionBar(toolbar)
 
         // get username if logging
