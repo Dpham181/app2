@@ -33,56 +33,57 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
     // INSERT TO TABLE USER IN SQLITE
     fun insertNewUser(username:String, password:String): Boolean {
+        if (username != "" && password != "") {
+            val db = writableDatabase
+            Log.d("Insert Working", "one row effected");
 
-        val db = writableDatabase
-        Log.d("Insert Working","one row effected");
+            // Create a new map of values, where column names are the keys
+            val values = ContentValues().apply {
+                put(Tables.User.COLUMN_1, username)
+                put(Tables.User.COLUMN_2, password)
 
-        // Create a new map of values, where column names are the keys
-        val values = ContentValues().apply {
-            put(Tables.User.COLUMN_1,username)
-            put(Tables.User.COLUMN_2, password)
+            }
 
+            val newrow = db?.insert(Tables.User.TABLE_USER, null, values);
+            if (newrow?.toInt() == -1) {
+                Log.d("new row", newrow?.toInt().toString())
+
+                db.close()
+                return false
+            } else {
+                db.close()
+
+                return true
+            }
         }
-
-           val newrow =  db?.insert(Tables.User.TABLE_USER, null, values);
-        if(newrow?.toInt() == -1 ) {
-            Log.d("new row",newrow?.toInt().toString() )
-
-            db.close()
-            return false
-        }else
-        {
-            db.close()
-
-            return true
-        }
-
+        return false
 
 
     }
 
     // LOGIN CHECK IF PASSWORD IS CORRECT FROM SQLITE DATABASE
     fun loginUser(username:String, password:String): Boolean {
+        if (username != "" && password != "") {
+            val db = readableDatabase
+            Log.d("login", "testing");
+            val cursor = db.rawQuery("SELECT * FROM  " + Tables.User.TABLE_USER + " WHERE " + Tables.User.COLUMN_1 + " = '" + username + "'", null)
 
-        val db = readableDatabase
-        Log.d("login","testing");
-        val cursor = db.rawQuery("SELECT * FROM  " + Tables.User.TABLE_USER + " WHERE "  + Tables.User.COLUMN_1 + " = '" + username + "'" , null)
 
+            cursor?.moveToFirst()
+            if (password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))) {
+                return true
+                Log.d("PASS c", "PASS WORD CORRECT")
+                db.close()
 
-        cursor?.moveToFirst()
-        if( password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))){
-            return true
-            Log.d("PASS c", "PASS WORD CORRECT")
-            db.close()
+            } else {
+                db.close()
 
-        }else
-        {
-            db.close()
+                return false
+                Log.d("PASS c", "PASS WORD INCORRECT")
 
-            return false
-            Log.d("PASS c", "PASS WORD INCORRECT")
-
+            }
         }
+        return false
 
     }
     // all moive in database
@@ -136,14 +137,14 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                 "CREATE TABLE ${Tables.User.TABLE_USER} (" +
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
                         "${Tables.User.COLUMN_1} TEXT NOT NULL UNIQUE," +
-                        "${Tables.User.COLUMN_2} TEXT)"
+                        "${Tables.User.COLUMN_2} TEXT NOT NULL)"
 
 
         private const val SQL_CREATE_ENTRIES2 =
                 "CREATE TABLE ${Tables.Moive.TABLE_MOIVE} (" +
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
-                        "${Tables.Moive.COLUMN_1} TEXT UNIQUE," +
-                        "${Tables.Moive.COLUMN_2} TEXT)"
+                        "${Tables.Moive.COLUMN_1} TEXT NOT NULL UNIQUE," +
+                        "${Tables.Moive.COLUMN_2} TEXT NOT NULL)"
 
 
 
