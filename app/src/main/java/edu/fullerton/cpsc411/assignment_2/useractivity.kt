@@ -1,11 +1,18 @@
 package edu.fullerton.cpsc411.assignment_2
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.activity_useractivity.*
+import kotlinx.android.synthetic.main.content_useractivity.*
 
 class useractivity : AppCompatActivity() {
 
@@ -14,7 +21,7 @@ class useractivity : AppCompatActivity() {
         setContentView(R.layout.activity_useractivity)
 
 
-         // https://developer.android.com/reference/kotlin/android/widget/Toolbar
+        // https://developer.android.com/reference/kotlin/android/widget/Toolbar
         setSupportActionBar(toolbar)
 
         // get username if logging
@@ -27,8 +34,31 @@ class useractivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
-    }
 
+
+        /*                          Recycler view                 */
+        // getting data from database return arraylist object
+        val db = MovieDbHelper.getInstance(this)
+        val listofmovies = db.AllMoive()
+        Log.d("list of movies", listofmovies.toString())
+        RecyclerViewMoive.layoutManager = LinearLayoutManager(this)
+
+        RecyclerViewMoive.adapter = object : RecyclerView.Adapter<ViewHolder>() {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                val itemView = layoutInflater.inflate(R.layout.movie_viewholder, parent, false)
+                return ViewHolder(itemView)
+            }
+
+            override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+                holder.text1.text = listofmovies[position].title
+                holder.text2.text = listofmovies[position].description
+            }
+
+            override fun getItemCount() = listofmovies.size
+
+
+        }
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.action, menu)

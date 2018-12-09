@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         db.insertNewMoive("Moive2" ,"test2")
         db.insertNewMoive("Moive 3" ,"test3")
-        db.AllMoive()
 
         if (savedInstanceState == null) {
 

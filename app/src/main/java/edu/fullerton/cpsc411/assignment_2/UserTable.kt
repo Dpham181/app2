@@ -17,6 +17,8 @@ object Tables {
             const val TABLE_MOIVE = "Moive"
             const val COLUMN_1 = "Title"
             const val COLUMN_2 = "Description"
+            const val COLUMN_3 = "Stars"
+
         }
     }
 

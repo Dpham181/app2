@@ -71,16 +71,17 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
         cursor?.moveToFirst()
         if( password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))){
-            return true
             Log.d("PASS c", "PASS WORD CORRECT")
             db.close()
+
+            return true
 
         }else
         {
             db.close()
+            Log.d("PASS c", "PASS WORD INCORRECT")
 
             return false
-            Log.d("PASS c", "PASS WORD INCORRECT")
 
         }
 
@@ -106,7 +107,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
     }
     // function get all moive in the database
 
-    fun AllMoive(){
+    fun AllMoive(): ArrayList<MovieModel> {
 
         val db = readableDatabase
         Log.d("ALL MOIVES ","testing");
@@ -124,12 +125,13 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
         Log.d("moives", Moives.toString())
         db.close()
+        return Moives
     }
 
     companion object {
         // If you change the database schema, you must increment the database version.
         const val DATABASE_VERSION = 1
-        const val DATABASE_NAME = "MoiveRs.db"
+        const val DATABASE_NAME = "MovieRs.db"
 
 
         private const val SQL_CREATE_ENTRIES =
@@ -143,8 +145,8 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                 "CREATE TABLE ${Tables.Moive.TABLE_MOIVE} (" +
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
                         "${Tables.Moive.COLUMN_1} TEXT UNIQUE," +
-                        "${Tables.Moive.COLUMN_2} TEXT)"
-
+                        "${Tables.Moive.COLUMN_2} TEXT,"+
+                        "${Tables.Moive.COLUMN_3}  INT NOT NULL DEFAULT '0' )"
 
 
 
