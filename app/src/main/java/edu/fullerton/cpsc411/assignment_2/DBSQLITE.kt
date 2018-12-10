@@ -89,7 +89,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
     }
     // all moive in database
-    fun insertNewMoive(title:String, description:String): Boolean {
+    fun insertNewMoive(title:String, description:String, img:String): Boolean {
 
         val db = writableDatabase
         Log.d("Insert Working","one row effected");
@@ -98,6 +98,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         val values = ContentValues().apply {
             put(Tables.Moive.COLUMN_1,title)
             put(Tables.Moive.COLUMN_2, description)
+            put(Tables.Moive.COLUMN_3, img)
 
         }
 
@@ -121,7 +122,8 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
                 val title = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_1))
                 val des = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_2))
-                Moives.add(MovieModel(title,des))
+                val img = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_3))
+                Moives.add(MovieModel(title,des,img))
             }
         }
 
@@ -148,7 +150,8 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
                         "${Tables.Moive.COLUMN_1} TEXT NOT NULL UNIQUE," +
                         "${Tables.Moive.COLUMN_2} TEXT NOT NULL,"+
-                        "${Tables.Moive.COLUMN_3}  INT NOT NULL DEFAULT '0' )"
+                        "${Tables.Moive.COLUMN_3} TEXT NOT NULL,"+
+                        "${Tables.Moive.COLUMN_4}  INT NOT NULL DEFAULT '0' )"
 
 
 

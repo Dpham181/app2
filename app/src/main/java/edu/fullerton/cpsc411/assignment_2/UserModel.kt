@@ -56,7 +56,6 @@ open class UserModel() : ViewModel(), Observable {
         else
         {
             Log.d("PASSWORD", "EMPTY")
-
         }
     }
 
