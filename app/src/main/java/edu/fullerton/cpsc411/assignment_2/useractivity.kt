@@ -1,5 +1,6 @@
 package edu.fullerton.cpsc411.assignment_2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -33,6 +34,10 @@ class useractivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
+
+            val intent =  Intent(this, CreateMovieActivity::class.java)
+            startActivity(intent)
+
         }
 
 

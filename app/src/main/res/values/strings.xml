@@ -11,4 +11,8 @@
     <string name="Location">Location</string>
     <string name="Cart">Cart</string>
     <string name="email">Email</string>
+    <string name="new_movie_title">New Movie Title</string>
+    <string name="description">Description</string>
+    <string name="app_2_save_button">Save</string>
+    <string name="app2_cancel_button">Cancel</string>
 </resources>
