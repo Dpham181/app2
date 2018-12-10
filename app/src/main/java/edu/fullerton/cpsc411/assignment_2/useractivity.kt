@@ -13,6 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.activity_useractivity.*
 import kotlinx.android.synthetic.main.content_useractivity.*
+import kotlinx.android.synthetic.main.movie_viewholder.*
+import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
+import android.R.attr.resource
+
+
+
 
 class useractivity : AppCompatActivity() {
 
@@ -52,6 +59,11 @@ class useractivity : AppCompatActivity() {
             override fun onBindViewHolder(holder: ViewHolder, position: Int) {
                 holder.text1.text = listofmovies[position].title
                 holder.text2.text = listofmovies[position].description
+
+                val id = resources.getIdentifier(listofmovies[position].img, "drawable", packageName)
+
+                val draw = ContextCompat.getDrawable(application, id)
+                holder.text3.setImageDrawable(draw)
             }
 
             override fun getItemCount() = listofmovies.size
