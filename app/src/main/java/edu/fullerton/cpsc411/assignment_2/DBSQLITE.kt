@@ -108,6 +108,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
         return true
     }
+
     // function get all moive in the database
 
     fun AllMoive(): ArrayList<MovieModel> {

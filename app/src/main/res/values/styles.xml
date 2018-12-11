@@ -27,8 +27,8 @@
     </style>
 
     <style name="Widget.app2.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="backgroundTint">?attr/colorPrimaryDark</item>
+        <item name="android:textColor">#FFFF</item>
+        <item name="backgroundTint">#03dac6</item>
 
     </style>
 
