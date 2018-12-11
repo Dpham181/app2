@@ -24,18 +24,20 @@ class CreateMovieActivity : AppCompatActivity() {
 
                 val newMovie = new_movie_title.text.toString()
                 val newDes = new_description.text.toString()
-                db.insertNewMoive(newMovie,
-                        newDes,
-                        "no")
-                Snackbar.make(view, "Movie is added", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show()
-            }
-            else {
-                Snackbar.make(view, "Cannot add this movie", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show()
+                val isExist = db.isMovieCreated(newMovie)
+
+                if (isExist == 0) {
+
+                    db.insertNewMoive(newMovie,
+                            newDes,
+                            "no")
+                    Snackbar.make(view, "Movie is added", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show()
+                } else {
+                    Snackbar.make(view, "Cannot add this movie or movie is already existed", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show()
+                }
             }
         }
-
-
     }
 }
