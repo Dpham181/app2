@@ -33,7 +33,7 @@ class useractivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         // get username if logging
-        val username = intent.getStringExtra(comefrom)
+        val username = intent.getStringExtra("comefrom")
         toolbar.title = "Welcome!!  " + username   // set appbar title to username
 
 
@@ -42,7 +42,9 @@ class useractivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
 
-            val intent =  Intent(this, CreateMovieActivity::class.java)
+            val intent =  Intent(this, CreateMovieActivity::class.java).apply {
+                putExtra("currentUser", username)
+            }
             startActivity(intent)
 
         }

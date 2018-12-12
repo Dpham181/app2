@@ -101,7 +101,7 @@ class LoginFragment : Fragment() {
             if (db.loginUser(username,password)){
                 // start new activity and sent the username to useractivity using put extra
                 val intent =  Intent(activity, useractivity::class.java).apply {
-                    putExtra(comefrom, username)
+                    putExtra("comefrom", username)
                 }
 
                 startActivity(intent) //call asynchronous
