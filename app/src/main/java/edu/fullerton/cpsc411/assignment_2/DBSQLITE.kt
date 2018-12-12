@@ -136,7 +136,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
     fun isMovieCreated(title: String): Int {
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT " + Tables.Moive.COLUMN_1 + " FROM " + Tables.Moive.TABLE_MOIVE
-                + " WHERE " + Tables.Moive.COLUMN_1 + " = " + title, null)
+                + " WHERE " + Tables.Moive.COLUMN_1 + " = '" + title +"'", null)
 
         return cursor.count
     }
