@@ -45,13 +45,15 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
             }
 
             val newrow = db?.insert(Tables.User.TABLE_USER, null, values);
-            if (newrow?.toInt() == -1) {
-                Log.d("new row", newrow?.toInt().toString())
+            if (newrow == -1.toLong()) {
+                Log.d("new row", newrow.toString())
 
                 db.close()
                 return false
             } else {
                 db.close()
+
+
 
                 return true
             }
