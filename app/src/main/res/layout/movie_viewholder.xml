@@ -15,7 +15,8 @@
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:isIndicator="true"/>
 
     <TextView
         android:id="@+id/moviedes"
@@ -29,6 +30,5 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/no"
         tools:ignore="ContentDescription" />
-
 
 </LinearLayout>

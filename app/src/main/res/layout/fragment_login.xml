@@ -68,6 +68,7 @@
 
                 android:layout_height="match_parent"
                 android:imeOptions="actionDone"
+                android:inputType="textPassword"
                 android:onTextChanged="@{(s,start,before,count) -> usermodel.PasswordTextChanged(s)}"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
