@@ -30,7 +30,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".CreateMovieActivity"></activity>
+        <activity android:name=".CreateMovieActivity"
+            android:parentActivityName=".useractivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
     </application>
 
 </manifest>
