@@ -1,5 +1,6 @@
 package edu.fullerton.cpsc411.assignment_2
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.fragment.app.*
@@ -21,16 +22,25 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
 
+            Handler().postDelayed({
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
 
                 supportFragmentManager.transaction(allowStateLoss = true) {
 
-                    add(R.id.Fragment_holder, LoginFragment())
+
+                    replace(R.id.Fragment_holder, LoginFragment())
+
+
+
+
+                }
+       }, 3000)
 
 
                 }
 
 
-            }
+
 
         }
 

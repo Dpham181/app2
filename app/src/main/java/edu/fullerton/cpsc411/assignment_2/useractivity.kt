@@ -52,6 +52,8 @@ class useractivity : AppCompatActivity() {
         // getting data from database return arraylist object
         val db = MovieDbHelper.getInstance(this)
         val listofmovies = db.AllMoive()
+
+
         Log.d("list of movies", listofmovies.toString())
         RecyclerViewMoive.layoutManager = LinearLayoutManager(this)
 

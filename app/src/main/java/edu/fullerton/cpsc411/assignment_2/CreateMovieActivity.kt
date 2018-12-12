@@ -1,5 +1,6 @@
 package edu.fullerton.cpsc411.assignment_2
 
+import android.app.PendingIntent.getActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +11,6 @@ import edu.fullerton.cpsc411.assignment_2.R.string.new_movie_title
 import kotlinx.android.synthetic.main.activity_create_movie.*
 
 class CreateMovieActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_movie)
@@ -34,7 +34,9 @@ class CreateMovieActivity : AppCompatActivity() {
                     Snackbar.make(view, "Movie is added", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
 
-                    finish()
+
+                    onBackPressed();
+
                 } else {
                     Snackbar.make(view, "Cannot add this movie or movie is already existed", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
@@ -42,4 +44,7 @@ class CreateMovieActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
 }

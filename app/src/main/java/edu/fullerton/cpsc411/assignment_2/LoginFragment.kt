@@ -105,7 +105,9 @@ class LoginFragment : Fragment() {
                 }
 
                 startActivity(intent) //call asynchronous
-           }
+                activity!!.overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+
+            }
             else
             {
                 alertDialog?.setMessage("SomeThing Wrong With Your Username OR Password")

@@ -20,7 +20,8 @@
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/logo"
             android:layout_width="0dp"
-            android:layout_height="210dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="400dp"
             android:src="@drawable/homelogo"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
