@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import android.util.Log
+import androidx.databinding.ObservableFloat
+import androidx.databinding.ObservableInt
 
 
 // https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase
@@ -71,19 +73,19 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
             val cursor = db.rawQuery("SELECT * FROM  " + Tables.User.TABLE_USER + " WHERE " + Tables.User.COLUMN_1 + " = '" + username + "'", null)
 
 
-        cursor?.moveToFirst()
-        if( password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))){
-            Log.d("PASS c", "PASS WORD CORRECT")
-            db.close()
+            cursor?.moveToFirst()
+            if( password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))){
+                Log.d("PASS c", "PASS WORD CORRECT")
+                db.close()
 
-            return true
+                return true
 
-        }else
-        {
-            db.close()
-            Log.d("PASS c", "PASS WORD INCORRECT")
+            }else
+            {
+                db.close()
+                Log.d("PASS c", "PASS WORD INCORRECT")
 
-            return false
+                return false
 
             }
         }
@@ -91,7 +93,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
     }
     // all moive in database
-    fun insertNewMoive(title:String, description:String, img:String, stars:Int): Boolean {
+    fun insertNewMoive(title:String, description:String , img:String): Boolean {
 
         val db = writableDatabase
         Log.d("Insert Working","one row effected");
@@ -100,8 +102,8 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         val values = ContentValues().apply {
             put(Tables.Moive.COLUMN_1,title)
             put(Tables.Moive.COLUMN_2, description)
-            put(Tables.Moive.COLUMN_3, img)
-            put(Tables.Moive.COLUMN_4, stars)
+            put(Tables.Moive.COLUMN_2, img)
+
 
         }
 
@@ -142,10 +144,70 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT " + Tables.Moive.COLUMN_1 + " FROM " + Tables.Moive.TABLE_MOIVE
                 + " WHERE " + Tables.Moive.COLUMN_1 + " = '" + title +"'", null)
-
         return cursor.count
     }
+    // functions like or dislike
 
+    fun getmovielike(pos:Int): Int {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM  " + Tables.Moive.TABLE_MOIVE + " WHERE " +  BaseColumns._ID + " =' " + pos +"'", null)
+        cursor?.moveToFirst()
+        val LikeIndicate = cursor.getInt(cursor.getColumnIndexOrThrow(Tables.Moive.COLUMN_5))
+
+        db.close()
+
+        return LikeIndicate
+
+    }
+    fun getStars(pos:Int): Int {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM  " + Tables.Moive.TABLE_MOIVE + " WHERE " +  BaseColumns._ID + " =' " + pos +"'", null)
+        cursor?.moveToFirst()
+        val StarsIndicate = cursor.getInt(cursor.getColumnIndexOrThrow(Tables.Moive.COLUMN_4))
+
+
+        db.close()
+
+        return StarsIndicate
+
+    }
+    fun updateStars(Stars:Int, pos: Int){
+        val db= writableDatabase
+        val values = ContentValues().apply {
+            put(Tables.Moive.COLUMN_4, Stars +1)
+        }
+
+        val selection = "${BaseColumns._ID} LIKE ?"
+        val selectionArgs = arrayOf(pos.toString())
+        db?.update(Tables.Moive.TABLE_MOIVE, values, selection,
+                selectionArgs)
+        db.close()
+    }
+    fun like(like:Int, pos:Int){
+        val db = writableDatabase
+
+
+        val values = ContentValues().apply {
+            put(Tables.Moive.COLUMN_5, like +1)
+        }
+
+        val selection = "${BaseColumns._ID} LIKE ?"
+        val selectionArgs = arrayOf(pos.toString())
+        db?.update(Tables.Moive.TABLE_MOIVE, values, selection,
+                selectionArgs)
+        db.close()
+    }
+    fun dislike(like:Int){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+
+            put(Tables.Moive.COLUMN_5, like-1)
+
+        }
+        db?.insert(Tables.Moive.TABLE_MOIVE, null, values);
+
+        db.close()
+    }
     companion object {
         // If you change the database schema, you must increment the database version.
         const val DATABASE_VERSION = 1
@@ -164,9 +226,9 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                         "${BaseColumns._ID} INTEGER PRIMARY KEY," +
                         "${Tables.Moive.COLUMN_1} TEXT NOT NULL UNIQUE," +
                         "${Tables.Moive.COLUMN_2} TEXT NOT NULL,"+
-                        "${Tables.Moive.COLUMN_3} TEXT NOT NULL,"+
-                        "${Tables.Moive.COLUMN_4}  INT NOT NULL DEFAULT '0' )"
-
+                        "${Tables.Moive.COLUMN_3} TEXT NOT NULL DEFAULT 'no',"+
+                        "${Tables.Moive.COLUMN_4}  INT NOT NULL DEFAULT '0' ," +
+                        "${Tables.Moive.COLUMN_5}  INT NOT NULL DEFAULT '0' )"
 
 
         private var sInstance: MovieDbHelper? = null

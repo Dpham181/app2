@@ -20,6 +20,12 @@
         android:stepSize="1"
         android:isIndicator="true"/>
 
+    <Button
+        android:id="@+id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Lb" />
+
     <TextView
         android:id="@+id/moviedes"
         android:layout_width="wrap_content"

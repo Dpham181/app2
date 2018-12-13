@@ -22,6 +22,11 @@ import android.R.attr.resource
 
 class useractivity : AppCompatActivity() {
 
+
+
+    private val db = MovieDbHelper.getInstance(this)
+    private val listofmovies = db.AllMoive()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_useractivity)
@@ -41,9 +46,7 @@ class useractivity : AppCompatActivity() {
                     .setAction("Action", null).show()
 
 
-            val intent =  Intent(this, CreateMovieActivity::class.java).apply {
-                putExtra("currentUser", username)
-            }
+            val intent =  Intent(this, CreateMovieActivity::class.java)
             startActivity(intent)
 
 
@@ -52,12 +55,8 @@ class useractivity : AppCompatActivity() {
 
         /*                          Recycler view                 */
         // getting data from database return arraylist object
-        val db = MovieDbHelper.getInstance(this)
-        val listofmovies = db.AllMoive()
 
-
-        Log.d("list of movies", listofmovies.toString())
-        RecyclerViewMoive.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
+        RecyclerViewMoive.layoutManager = LinearLayoutManager(this)
 
         RecyclerViewMoive.adapter = object : RecyclerView.Adapter<ViewHolder>() {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -66,17 +65,30 @@ class useractivity : AppCompatActivity() {
             }
 
             override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-                holder.text1.text = listofmovies[position].title
-                holder.text2.text = listofmovies[position].description
 
-                holder.rate.rating = (listofmovies[position].stars.toFloat()) //listofmovies[position].rating.toFloat()/10
+                holder.movietitle.text = listofmovies[position].title
+                holder.moviedes.text = listofmovies[position].description
 
                 val id = resources.getIdentifier(listofmovies[position].img, "drawable", packageName)
-
                 val draw = ContextCompat.getDrawable(application, id)
-                holder.text3.setImageDrawable(draw)
-            }
+                holder.holder_image.setImageDrawable(draw)
+                val stars = db.getStars(position+1)  // getting stars from db
+                holder.stars.rating = stars.toFloat() // generated
 
+                // like buuton click then call db to get count of like in sqlite
+                // then update like + 1 and update
+                holder.like.setOnClickListener() {
+                    val getlike = db.getmovielike(position + 1)
+
+                    db.like(getlike, position + 1)
+
+
+                    if (getlike >= 5 && getlike < 10) {
+                        db.updateStars(stars, position + 1)
+                    }
+
+                }
+            }
             override fun getItemCount() = listofmovies.size
 
 
@@ -91,8 +103,15 @@ class useractivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.action, menu)
         return true
     }
-
-
+    override fun onResume() {
+        super.onResume()
+        val Updatedlist = db.AllMoive()
+        if(Updatedlist.size > listofmovies.size){
+            RecyclerViewMoive.adapter!!.notifyDataSetChanged()
+            listofmovies.clear()
+            listofmovies.addAll(Updatedlist)
+        }
+    }
 
 
 

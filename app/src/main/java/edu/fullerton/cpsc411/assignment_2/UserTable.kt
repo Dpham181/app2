@@ -19,6 +19,8 @@ object Tables {
             const val COLUMN_2 = "Description"
             const val COLUMN_3 = "IMG"
             const val COLUMN_4 = "Stars"
+            const val COLUMN_5 = "LikeIndicate"
+
 
         }
     }

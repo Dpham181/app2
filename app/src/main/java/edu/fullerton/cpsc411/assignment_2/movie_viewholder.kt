@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 // viewholder getting two text view from movie_viewholder xml
 
 class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-    val text1 = item.findViewById<TextView>(R.id.movietitle)
-    val text2 = item.findViewById<TextView>(R.id.moviedes)
-    val text3 = item.findViewById<ImageView>(R.id.holder_image)
-    val rate = item.findViewById<RatingBar>(R.id.ratingBar)
-
+    val movietitle = item.findViewById<TextView>(R.id.movietitle)
+    val moviedes = item.findViewById<TextView>(R.id.moviedes)
+    val holder_image = item.findViewById<ImageView>(R.id.holder_image)
+    val like = item.findViewById<View>(R.id.like)
+    val stars = item.findViewById<RatingBar>(R.id.ratingBar)
 }

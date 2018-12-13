@@ -24,7 +24,6 @@ class CreateMovieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_movie)
 
         val db = MovieDbHelper.getInstance(this)
-        val username = intent.getStringExtra("currentUser")
 
         val notEmpty: EditText.() -> Boolean = {text.isNotEmpty()}
         save_button.setOnClickListener { view ->
@@ -38,17 +37,11 @@ class CreateMovieActivity : AppCompatActivity() {
                 if (isExist == 0) {
 
                     db.insertNewMoive(newMovie,
-                            newDes,
-                            "no", 0)
+                            newDes,"no")
                     Snackbar.make(view, "Movie is added", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
 
-
-                    val intent =  Intent(this, useractivity::class.java).apply {
-                        putExtra("comefrom", username)
-                    }
                     finish()
-                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
 
 
