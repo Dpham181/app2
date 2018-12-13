@@ -39,7 +39,7 @@ class CreateMovieActivity : AppCompatActivity() {
 
                     db.insertNewMoive(newMovie,
                             newDes,
-                            "no")
+                            "no", 0)
                     Snackbar.make(view, "Movie is added", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
 

@@ -2,6 +2,7 @@ package edu.fullerton.cpsc411.assignment_2
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -13,5 +14,6 @@ class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
     val text1 = item.findViewById<TextView>(R.id.movietitle)
     val text2 = item.findViewById<TextView>(R.id.moviedes)
     val text3 = item.findViewById<ImageView>(R.id.holder_image)
+    val rate = item.findViewById<RatingBar>(R.id.ratingBar)
 
 }

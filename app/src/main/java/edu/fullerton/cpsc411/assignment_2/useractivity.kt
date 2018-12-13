@@ -57,7 +57,7 @@ class useractivity : AppCompatActivity() {
 
 
         Log.d("list of movies", listofmovies.toString())
-        RecyclerViewMoive.layoutManager = LinearLayoutManager(this)
+        RecyclerViewMoive.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
 
         RecyclerViewMoive.adapter = object : RecyclerView.Adapter<ViewHolder>() {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -68,6 +68,8 @@ class useractivity : AppCompatActivity() {
             override fun onBindViewHolder(holder: ViewHolder, position: Int) {
                 holder.text1.text = listofmovies[position].title
                 holder.text2.text = listofmovies[position].description
+
+                holder.rate.rating = (listofmovies[position].stars.toFloat()) //listofmovies[position].rating.toFloat()/10
 
                 val id = resources.getIdentifier(listofmovies[position].img, "drawable", packageName)
 

@@ -91,7 +91,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
     }
     // all moive in database
-    fun insertNewMoive(title:String, description:String, img:String): Boolean {
+    fun insertNewMoive(title:String, description:String, img:String, stars:Int): Boolean {
 
         val db = writableDatabase
         Log.d("Insert Working","one row effected");
@@ -101,6 +101,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
             put(Tables.Moive.COLUMN_1,title)
             put(Tables.Moive.COLUMN_2, description)
             put(Tables.Moive.COLUMN_3, img)
+            put(Tables.Moive.COLUMN_4, stars)
 
         }
 
@@ -126,7 +127,9 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                 val title = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_1))
                 val des = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_2))
                 val img = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_3))
-                Moives.add(MovieModel(title,des,img))
+                val stars = getInt(getColumnIndexOrThrow(Tables.Moive.COLUMN_4))
+
+                Moives.add(MovieModel(title,des,img,stars))
             }
         }
 
