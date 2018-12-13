@@ -72,7 +72,6 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
             Log.d("login", "testing");
             val cursor = db.rawQuery("SELECT * FROM  " + Tables.User.TABLE_USER + " WHERE " + Tables.User.COLUMN_1 + " = '" + username + "'", null)
 
-
             cursor?.moveToFirst()
             if( password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))){
                 Log.d("PASS c", "PASS WORD CORRECT")
@@ -102,7 +101,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         val values = ContentValues().apply {
             put(Tables.Moive.COLUMN_1,title)
             put(Tables.Moive.COLUMN_2, description)
-            put(Tables.Moive.COLUMN_2, img)
+            put(Tables.Moive.COLUMN_3, img)
 
 
         }

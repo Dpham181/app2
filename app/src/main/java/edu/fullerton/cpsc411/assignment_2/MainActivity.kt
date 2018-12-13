@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val db = MovieDbHelper.getInstance(this)
 
-        db.insertNewMoive("Moive1" ,"test1")
+        db.insertNewMoive("Moive1" ,"test1","no")
 
-        db.insertNewMoive("Moive2" ,"test2")
-        db.insertNewMoive("Moive 3" ,"test3")
+        db.insertNewMoive("Moive2" ,"test2","harry")
+        db.insertNewMoive("Moive 3" ,"test3","no")
 
         if (savedInstanceState == null) {
 
