@@ -20,8 +20,6 @@ import androidx.core.content.ContextCompat
 import android.R.attr.resource
 
 
-
-
 class useractivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +32,7 @@ class useractivity : AppCompatActivity() {
 
         // get username if logging
         val username = intent.getStringExtra("comefrom")
-        toolbar.title = "Welcome!!  " + username   // set appbar title to username
+        toolbar.title = "Welcome " + username + "!"   // set appbar title to username
 
 
         // icon popup

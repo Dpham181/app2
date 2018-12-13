@@ -53,7 +53,7 @@ class CreateMovieActivity : AppCompatActivity() {
 
 
                     } else {
-                    Snackbar.make(view, "Cannot add this movie or movie is already existed", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "Cannot add this movie or movie already exists", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
                 }
             }

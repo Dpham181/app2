@@ -54,8 +54,8 @@ class LoginFragment : Fragment() {
         val alertDialog: AlertDialog? = activity?.let {
             val builder = AlertDialog.Builder(it)
             builder.apply {
-                setTitle("Thanks For Join Us")
-                setMessage("Your Account Successfully Created")
+                setTitle("Thanks for joining us")
+                setMessage("Your Account has been successfully created")
             }
             // Set other dialog properties
 
