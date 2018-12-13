@@ -91,9 +91,20 @@ class useractivity : AppCompatActivity() {
                         when
                         {
                             it == 5 ->  db.updateStars(stars, position + 1)
+                            it == 10 ->  db.updateStars(stars, position + 1)
                             it  == 15 -> db.updateStars(stars, position + 1)
                             it == 20 -> db.updateStars(stars, position + 1)
                             it == 25 -> db.updateStars(stars, position + 1)
+                            it == 30 -> db.updateStars(stars, position + 1)
+                            it == 35 -> db.updateStars(stars, position + 1)
+                            it == 40 -> db.updateStars(stars, position + 1)
+                            it == 45 -> db.updateStars(stars, position + 1)
+                            it == 50 -> db.updateStars(stars, position + 1)
+
+                            else -> db.updateStars(stars, position + 1)
+
+
+
 
                         }
                     }
