@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import edu.fullerton.cpsc411.assignment_2.R.string.new_movie_title
 import kotlinx.android.synthetic.main.activity_create_movie.*
-import kotlinx.android.synthetic.main.content_useractivity.*
+
+import kotlinx.android.synthetic.main.fragment_login.*
+
 
 class CreateMovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +24,7 @@ class CreateMovieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_movie)
 
         val db = MovieDbHelper.getInstance(this)
+        val username = intent.getStringExtra("currentUser")
 
         val notEmpty: EditText.() -> Boolean = {text.isNotEmpty()}
         save_button.setOnClickListener { view ->
@@ -41,13 +44,11 @@ class CreateMovieActivity : AppCompatActivity() {
                             .setAction("Action", null).show()
 
 
+                    val intent =  Intent(this, useractivity::class.java).apply {
+                        putExtra("comefrom", username)
+                    }
                     finish()
-
-//                    val intent =  Intent(this, useractivity::class.java)
-//                    startActivity(intent)
-//                    onBackPressed()
-
-
+                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
 
 
