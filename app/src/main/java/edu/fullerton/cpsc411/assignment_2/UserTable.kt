@@ -9,7 +9,7 @@ object Tables {
         companion object {
             const val TABLE_USER = "users"
             const val COLUMN_1 = "username"
-           const val COLUMN_2 = "password"
+            const val COLUMN_2 = "password"
         }
     }
     class Moive : BaseColumns {
@@ -22,6 +22,13 @@ object Tables {
 
         }
     }
+//    class UserLikes : BaseColumns {
+//        companion object{
+//            const val TABLE_USERLIKES = "UserLikes"
+//            const val COLUMN_1 = "username"
+//            const
+//        }
+//    }
 
 }
 

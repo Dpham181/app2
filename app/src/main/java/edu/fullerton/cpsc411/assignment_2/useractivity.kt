@@ -43,7 +43,8 @@ class useractivity : AppCompatActivity() {
                     .setAction("Action", null).show()
 
             val intent =  Intent(this, CreateMovieActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
+
 
         }
 
@@ -77,11 +78,53 @@ class useractivity : AppCompatActivity() {
 
 
         }
+
+
+
+
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.action, menu)
         return true
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1){
+            val db = MovieDbHelper.getInstance(this)
+            val listofmovies = db.AllMoive()
+
+
+            Log.d("list of movies", listofmovies.toString())
+            RecyclerViewMoive.layoutManager = LinearLayoutManager(this)
+
+
+            val newAdapt = object : RecyclerView.Adapter<ViewHolder>() {
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                    val itemView = layoutInflater.inflate(R.layout.movie_viewholder, parent, false)
+                    return ViewHolder(itemView)
+                }
+
+                override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+                    holder.text1.text = listofmovies[position].title
+                    holder.text2.text = listofmovies[position].description
+
+                    val id = resources.getIdentifier(listofmovies[position].img, "drawable", packageName)
+
+                    val draw = ContextCompat.getDrawable(application, id)
+                    holder.text3.setImageDrawable(draw)
+                }
+
+                override fun getItemCount() = listofmovies.size
+
+
+            }
+
+            RecyclerViewMoive.adapter = newAdapt
+        }
+    }
+
+
+
 
 }

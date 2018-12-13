@@ -1,14 +1,20 @@
 package edu.fullerton.cpsc411.assignment_2
 
 import android.app.PendingIntent.getActivity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import edu.fullerton.cpsc411.assignment_2.R.string.new_movie_title
 import kotlinx.android.synthetic.main.activity_create_movie.*
+import kotlinx.android.synthetic.main.content_useractivity.*
 
 class CreateMovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +41,17 @@ class CreateMovieActivity : AppCompatActivity() {
                             .setAction("Action", null).show()
 
 
-                    onBackPressed();
+                    finish()
 
-                } else {
+//                    val intent =  Intent(this, useractivity::class.java)
+//                    startActivity(intent)
+//                    onBackPressed()
+
+
+
+
+
+                    } else {
                     Snackbar.make(view, "Cannot add this movie or movie is already existed", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
                 }
