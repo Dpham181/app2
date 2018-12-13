@@ -68,12 +68,17 @@ class useractivity : AppCompatActivity() {
 
                 holder.movietitle.text = listofmovies[position].title
                 holder.moviedes.text = listofmovies[position].description
+                holder.stars.rating = listofmovies[position].stars
 
+
+                // pic img getting id of img from drawable then set holder
                 val id = resources.getIdentifier(listofmovies[position].img, "drawable", packageName)
                 val draw = ContextCompat.getDrawable(application, id)
                 holder.holder_image.setImageDrawable(draw)
+
+
+
                 val stars = db.getStars(position+1)  // getting stars from db
-                holder.stars.rating = stars.toFloat() // generated
 
                 // like buuton click then call db to get count of like in sqlite
                 // then update like + 1 and update
@@ -82,12 +87,27 @@ class useractivity : AppCompatActivity() {
 
                     db.like(getlike, position + 1)
 
+                    getlike.let{
+                        when
+                        {
+                            it == 5 ->  db.updateStars(stars, position + 1)
+                            it  == 15 -> db.updateStars(stars, position + 1)
+                            it == 20 -> db.updateStars(stars, position + 1)
+                            it == 25 -> db.updateStars(stars, position + 1)
 
-                    if (getlike >= 5 && getlike < 10) {
-                        db.updateStars(stars, position + 1)
+                        }
                     }
 
+
+                    RecyclerViewMoive.adapter!!.notifyItemChanged(position)
+                    val newlist = db.AllMoive()
+                    listofmovies.clear()
+                    listofmovies.addAll(newlist)
+                    holder.stars.rating = listofmovies[position].stars
+
                 }
+
+
             }
             override fun getItemCount() = listofmovies.size
 
@@ -103,14 +123,20 @@ class useractivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.action, menu)
         return true
     }
-    override fun onResume() {
-        super.onResume()
+    private fun onUpdateRecylerview(){
         val Updatedlist = db.AllMoive()
         if(Updatedlist.size > listofmovies.size){
-            RecyclerViewMoive.adapter!!.notifyDataSetChanged()
+            Log.d("new list", Updatedlist.toString())
             listofmovies.clear()
             listofmovies.addAll(Updatedlist)
+            Log.d("after update list", listofmovies.toString())
+            RecyclerViewMoive.adapter!!.notifyDataSetChanged()
+
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        onUpdateRecylerview()
     }
 
 

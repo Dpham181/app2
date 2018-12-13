@@ -128,7 +128,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                 val title = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_1))
                 val des = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_2))
                 val img = getString(getColumnIndexOrThrow(Tables.Moive.COLUMN_3))
-                val stars = getInt(getColumnIndexOrThrow(Tables.Moive.COLUMN_4))
+                val stars = getFloat(getColumnIndexOrThrow(Tables.Moive.COLUMN_4))
 
                 Moives.add(MovieModel(title,des,img,stars))
             }
@@ -158,11 +158,11 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         return LikeIndicate
 
     }
-    fun getStars(pos:Int): Int {
+    fun getStars(pos:Int): Float {
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT * FROM  " + Tables.Moive.TABLE_MOIVE + " WHERE " +  BaseColumns._ID + " =' " + pos +"'", null)
         cursor?.moveToFirst()
-        val StarsIndicate = cursor.getInt(cursor.getColumnIndexOrThrow(Tables.Moive.COLUMN_4))
+        val StarsIndicate = cursor.getFloat(cursor.getColumnIndexOrThrow(Tables.Moive.COLUMN_4))
 
 
         db.close()
@@ -170,10 +170,10 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         return StarsIndicate
 
     }
-    fun updateStars(Stars:Int, pos: Int){
+    fun updateStars(Stars:Float, pos: Int){
         val db= writableDatabase
         val values = ContentValues().apply {
-            put(Tables.Moive.COLUMN_4, Stars +1)
+            put(Tables.Moive.COLUMN_4, Stars + 0.5)
         }
 
         val selection = "${BaseColumns._ID} LIKE ?"
@@ -226,7 +226,7 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                         "${Tables.Moive.COLUMN_1} TEXT NOT NULL UNIQUE," +
                         "${Tables.Moive.COLUMN_2} TEXT NOT NULL,"+
                         "${Tables.Moive.COLUMN_3} TEXT NOT NULL DEFAULT 'no',"+
-                        "${Tables.Moive.COLUMN_4}  INT NOT NULL DEFAULT '0' ," +
+                        "${Tables.Moive.COLUMN_4}  REAL NOT NULL DEFAULT '0.0' ," +
                         "${Tables.Moive.COLUMN_5}  INT NOT NULL DEFAULT '0' )"
 
 
