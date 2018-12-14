@@ -170,10 +170,22 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
         return StarsIndicate
 
     }
-    fun updateStars(Stars:Float, pos: Int){
+    fun incrementStars(Stars:Float, pos: Int){
         val db= writableDatabase
         val values = ContentValues().apply {
             put(Tables.Moive.COLUMN_4, Stars + 0.5)
+        }
+
+        val selection = "${BaseColumns._ID} LIKE ?"
+        val selectionArgs = arrayOf(pos.toString())
+        db?.update(Tables.Moive.TABLE_MOIVE, values, selection,
+                selectionArgs)
+        db.close()
+    }
+    fun decrementStars(Stars:Float, pos: Int) {
+        val db= writableDatabase
+        val values = ContentValues().apply {
+            put(Tables.Moive.COLUMN_4, Stars - 0.5)
         }
 
         val selection = "${BaseColumns._ID} LIKE ?"
@@ -196,15 +208,29 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                 selectionArgs)
         db.close()
     }
-    fun dislike(like:Int){
+//    fun dislike(like:Int){
+//        val db = writableDatabase
+//        val values = ContentValues().apply {
+//
+//            put(Tables.Moive.COLUMN_5, like-1)
+//
+//        }
+//        db?.insert(Tables.Moive.TABLE_MOIVE, null, values);
+//
+//        db.close()
+
+    fun dislike(like:Int, pos:Int){
         val db = writableDatabase
+
+
         val values = ContentValues().apply {
-
-            put(Tables.Moive.COLUMN_5, like-1)
-
+            put(Tables.Moive.COLUMN_5, like -1)
         }
-        db?.insert(Tables.Moive.TABLE_MOIVE, null, values);
 
+        val selection = "${BaseColumns._ID} LIKE ?"
+        val selectionArgs = arrayOf(pos.toString())
+        db?.update(Tables.Moive.TABLE_MOIVE, values, selection,
+                selectionArgs)
         db.close()
     }
     companion object {

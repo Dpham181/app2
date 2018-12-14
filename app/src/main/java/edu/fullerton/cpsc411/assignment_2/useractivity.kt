@@ -90,7 +90,7 @@ class useractivity : AppCompatActivity() {
                     getlike.let{
                         when
                         {
-                            it % 5 == 0 -> db.updateStars(stars, position + 1)
+                            it % 5 == 0 -> db.incrementStars(stars, position + 1)
                         }
                     }
 
@@ -102,6 +102,28 @@ class useractivity : AppCompatActivity() {
                     holder.stars.rating = listofmovies[position].stars
 
                 }
+
+                holder.disLike.setOnClickListener() {
+                    val getlike = db.getmovielike(position + 1)
+
+                    db.dislike(getlike, position + 1)
+
+                    getlike.let{
+                        when
+                        {
+                            it % 5 == 0 -> db.decrementStars(stars, position + 1)
+                        }
+                    }
+
+
+                    RecyclerViewMoive.adapter!!.notifyItemChanged(position)
+                    val newlist = db.AllMoive()
+                    listofmovies.clear()
+                    listofmovies.addAll(newlist)
+                    holder.stars.rating = listofmovies[position].stars
+
+                }
+
 
 
             }
