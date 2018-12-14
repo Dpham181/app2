@@ -17,4 +17,5 @@
     <string name="app2_cancel_button">Cancel</string>
     <string name="Lb">Like</string>
     <string name="dislike_button">DISLIKE</string>
+    <string name="LogOut">logout</string>
 </resources>
