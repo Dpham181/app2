@@ -16,5 +16,5 @@
     <string name="app_2_save_button">Save</string>
     <string name="app2_cancel_button">Cancel</string>
     <string name="Lb">Like</string>
-    <string name="LogOut">Log Out</string>
+    <string name="dislike_button">DISLIKE</string>
 </resources>
