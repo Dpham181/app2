@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.movie_viewholder.*
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import android.R.attr.resource
+import android.view.MenuItem
 
 
 class useractivity : AppCompatActivity() {
@@ -90,21 +91,7 @@ class useractivity : AppCompatActivity() {
                     getlike.let{
                         when
                         {
-                            it == 5 ->  db.updateStars(stars, position + 1)
-                            it == 10 ->  db.updateStars(stars, position + 1)
-                            it  == 15 -> db.updateStars(stars, position + 1)
-                            it == 20 -> db.updateStars(stars, position + 1)
-                            it == 25 -> db.updateStars(stars, position + 1)
-                            it == 30 -> db.updateStars(stars, position + 1)
-                            it == 35 -> db.updateStars(stars, position + 1)
-                            it == 40 -> db.updateStars(stars, position + 1)
-                            it == 45 -> db.updateStars(stars, position + 1)
-                            it == 50 -> db.updateStars(stars, position + 1)
-
-                            else -> db.updateStars(stars, position + 1)
-
-
-
+                            it  %5 ==0 ->  db.updateStars(stars, position + 1)
 
                         }
                     }
@@ -133,6 +120,37 @@ class useractivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.action, menu)
         return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        return when (item?.itemId) // ITEMS NOT NULL CHECK BY USING ?
+        {
+            R.id.Profile -> {
+
+                true;
+
+            }
+
+            R.id.Cart -> {
+
+                true;
+            }
+
+            R.id.Contact -> {
+
+
+                true;
+            }
+
+            R.id.LogOut -> {
+                finish()
+                true;
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
     private fun onUpdateRecylerview(){
         val Updatedlist = db.AllMoive()

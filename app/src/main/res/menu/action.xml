@@ -35,6 +35,11 @@
         android:icon="@drawable/location"
         />
 
+    <item
 
+        android:id = "@+id/LogOut"
+        android:title = "@string/LogOut"
+        app:showAsAction="ifRoom"
+        />
 
 </menu>
