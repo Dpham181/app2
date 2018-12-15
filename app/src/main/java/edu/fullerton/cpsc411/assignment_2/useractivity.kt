@@ -19,6 +19,7 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import android.R.attr.resource
 import android.view.MenuItem
+import android.webkit.WebView
 
 
 class useractivity : AppCompatActivity() {
@@ -158,6 +159,10 @@ class useractivity : AppCompatActivity() {
             }
 
             R.id.Contact -> {
+
+                val intent =  Intent(this, ContactActivity::class.java)
+                startActivity(intent)
+
 
 
                 true;

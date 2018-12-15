@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="edu.fullerton.cpsc411.assignment_2">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:appComponentFactory="whateverString"
@@ -24,14 +26,23 @@
         <activity
             android:name=".useractivity"
             android:label="@string/title_activity_useractivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".CreateMovieActivity"
+        <activity
+            android:name=".CreateMovieActivity"
             android:parentActivityName=".useractivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity android:name=".ContactActivity"
+            android:parentActivityName=".useractivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
