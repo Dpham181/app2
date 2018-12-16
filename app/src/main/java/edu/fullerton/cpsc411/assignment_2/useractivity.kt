@@ -163,6 +163,7 @@ class useractivity : AppCompatActivity() {
                 val intent =  Intent(this, ContactActivity::class.java)
                 startActivity(intent)
 
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
 
 
                 true;

@@ -1,0 +1,68 @@
+img{
+  border-radius: 50%;
+    display: inline-block;
+     margin-left: 30%;
+     margin-right: 30%;
+
+   height:140px;
+  animation-name: slideRight;
+      -webkit-animation-name: slideRight;
+      animation-duration: 4s;
+      -webkit-animation-duration: 4s;
+      animation-timing-function: ease-in-out;
+      -webkit-animation-timing-function: ease-in-out;
+      visibility: visible !important;
+      animation-delay: 0s;
+      -webkit-animation-delay: 0s;
+      display: inline-block;
+
+}
+
+header{
+    border-bottom:solid;
+
+}
+footer{
+    border-top:solid;
+
+}
+h1{
+  font-style: italic;
+
+    text-align:center;
+}
+h2{
+      font-style: italic;
+
+    text-align:center;
+
+}
+p{
+    text-align:center;
+   font-size: 30px;
+
+  font-style: italic;
+
+}
+
+
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-150%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes slideRight {
+    0% {
+        -webkit-transform: translateX(-150%);
+    }
+
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}

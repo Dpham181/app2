@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
 
             Handler().postDelayed({
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
 
                 supportFragmentManager.transaction(allowStateLoss = true) {
 
@@ -31,10 +30,8 @@ class MainActivity : AppCompatActivity() {
                     replace(R.id.Fragment_holder, LoginFragment())
 
 
-
-
                 }
-       }, 0)
+       }, 1000)
 
 
                 }

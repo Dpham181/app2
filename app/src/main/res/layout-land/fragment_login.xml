@@ -50,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
                 android:onTextChanged="@{(s,start,before,count) -> usermodel.UsernameTextChanged(s)}"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/colorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -74,7 +75,8 @@
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:onTextChanged="@{(s,start,before,count) -> usermodel.PasswordTextChanged(s)}"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/colorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
 

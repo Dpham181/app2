@@ -2,13 +2,10 @@ package edu.fullerton.cpsc411.assignment_2
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import android.util.Log
-import androidx.databinding.ObservableFloat
-import androidx.databinding.ObservableInt
 
 
 // https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase
