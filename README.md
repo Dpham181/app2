@@ -37,7 +37,7 @@ add movie to the list view, and rate each movie based on their interest.
 - **Pham,Danh** - _danhpham312@gmail.com_ - [Dpham181](https://github.com/Dpham181)
 - **Cabantug,Brian** [bcabantug](https://github.com/bcabantug)
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/tngo0508/APP_1/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Dpham181/app2/blob/master/LICENSE) file for details
 ## Acknowledgements
 -   **Professor Kenytt Avery** - _kavery@fullerton.edu_ - California State University, Fullerton
 -   **Android developers** - [Training Courses](https://developer.android.com/)
