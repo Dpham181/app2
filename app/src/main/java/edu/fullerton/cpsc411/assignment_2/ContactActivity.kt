@@ -21,6 +21,6 @@ class ContactActivity : AppCompatActivity() {
         web.settings.javaScriptEnabled = true
         web.settings.domStorageEnabled = true
         web.overScrollMode = WebView.OVER_SCROLL_NEVER
-        web.loadUrl("https://google.com")
+        web.loadUrl("file:////android_asset/contact.html")
     }
 }
