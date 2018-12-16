@@ -4,22 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.activity_useractivity.*
 import kotlinx.android.synthetic.main.content_useractivity.*
-import kotlinx.android.synthetic.main.movie_viewholder.*
-import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
-import android.R.attr.resource
 import android.view.MenuItem
-import android.webkit.WebView
 
 
 class useractivity : AppCompatActivity() {
@@ -43,10 +36,7 @@ class useractivity : AppCompatActivity() {
 
 
         // icon popup
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-
+        fab.setOnClickListener {
 
             val intent =  Intent(this, CreateMovieActivity::class.java)
             startActivity(intent)
@@ -153,10 +143,6 @@ class useractivity : AppCompatActivity() {
 
             }
 
-            R.id.Cart -> {
-
-                true;
-            }
 
             R.id.Contact -> {
 

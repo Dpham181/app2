@@ -9,13 +9,6 @@
         android:icon="@drawable/profile"
         />
 
-    <item
-
-        android:id = "@+id/Cart"
-        android:title = "@string/Cart"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/cart"
-        />
 
     <item
 

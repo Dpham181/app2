@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">assignment_2</string>
+    <string name="app_name">Rating Moive App</string>
     <string name="password">Password</string>
     <string name="Rbutton">Register</string>
     <string name="unelevated_button_label_enabled">Login</string>

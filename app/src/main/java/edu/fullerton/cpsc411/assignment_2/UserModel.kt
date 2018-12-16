@@ -1,29 +1,12 @@
 package edu.fullerton.cpsc411.assignment_2
 
 import android.util.Log
-import androidx.databinding.Observable
-import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 
-open class UserModel() : ViewModel(), Observable {
+open class UserModel() : ViewModel() {
 
-
-    private val callbacks: PropertyChangeRegistry = PropertyChangeRegistry()
-
-
-
-    // build in call back
-    override fun addOnPropertyChangedCallback(
-            callback: Observable.OnPropertyChangedCallback) {
-        callbacks.add(callback)
-    }
-
-    override fun removeOnPropertyChangedCallback(
-            callback: Observable.OnPropertyChangedCallback) {
-        callbacks.remove(callback)
-    }
 
 
     val username: MutableLiveData<String> by lazy {
