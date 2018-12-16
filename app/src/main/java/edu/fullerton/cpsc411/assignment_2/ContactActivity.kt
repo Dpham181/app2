@@ -14,7 +14,6 @@ class ContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact)
 
-
         web = webView
 
         web.webViewClient = WebViewClient()

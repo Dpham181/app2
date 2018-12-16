@@ -84,6 +84,8 @@ class LoginFragment : Fragment() {
 
 
            if( db.insertNewUser(username,password)) {
+               alertDialog?.setTitle("Thanks for joining us")
+               alertDialog?.setMessage("Your Account has been successfully created")
                alertDialog?.show()
 
            }
@@ -108,6 +110,7 @@ class LoginFragment : Fragment() {
             }
             else
             {
+                alertDialog?.setTitle("Oops!")
                 alertDialog?.setMessage("SomeThing Wrong With Your Username OR Password")
                 alertDialog?.show()
             }
