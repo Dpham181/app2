@@ -29,7 +29,7 @@ open class UserModel() : ViewModel() {
         }
 
     }
-    // second text on change to get update for net speed called mbps
+   
     fun PasswordTextChanged(s: CharSequence) {
 
         if (s.isNotEmpty()) {
