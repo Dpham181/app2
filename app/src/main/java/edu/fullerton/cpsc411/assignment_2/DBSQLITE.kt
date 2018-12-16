@@ -64,26 +64,29 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
 
     // LOGIN CHECK IF PASSWORD IS CORRECT FROM SQLITE DATABASE
     fun loginUser(username:String, password:String): Boolean {
-        if (username != "" && password != "") {
+        if (username.isNotEmpty() && password.isNotEmpty()) {
             val db = readableDatabase
             Log.d("login", "testing");
             val cursor = db.rawQuery("SELECT * FROM  " + Tables.User.TABLE_USER + " WHERE " + Tables.User.COLUMN_1 + " = '" + username + "'", null)
 
-            cursor?.moveToFirst()
-            if( password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))){
-                Log.d("PASS c", "PASS WORD CORRECT")
-                db.close()
+            if (cursor.count > 0) {
 
-                return true
+                cursor?.moveToFirst()
+                if (password == cursor.getString(cursor.getColumnIndex(Tables.User.COLUMN_2))) {
+                    Log.d("PASS c", "PASS WORD CORRECT")
+                    db.close()
 
-            }else
-            {
-                db.close()
-                Log.d("PASS c", "PASS WORD INCORRECT")
+                    return true
 
-                return false
+                } else {
+                    db.close()
+                    Log.d("PASS c", "PASS WORD INCORRECT")
 
+                    return false
+
+                }
             }
+            return false
         }
         return false
 
