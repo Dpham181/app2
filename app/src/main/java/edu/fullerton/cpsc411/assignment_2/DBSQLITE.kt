@@ -208,16 +208,6 @@ class MovieDbHelper(context: Context) :  SQLiteOpenHelper(context, DATABASE_NAME
                 selectionArgs)
         db.close()
     }
-//    fun dislike(like:Int){
-//        val db = writableDatabase
-//        val values = ContentValues().apply {
-//
-//            put(Tables.Moive.COLUMN_5, like-1)
-//
-//        }
-//        db?.insert(Tables.Moive.TABLE_MOIVE, null, values);
-//
-//        db.close()
 
     fun dislike(like:Int, pos:Int){
         val db = writableDatabase

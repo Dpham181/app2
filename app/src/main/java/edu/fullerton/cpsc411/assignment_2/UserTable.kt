@@ -24,13 +24,5 @@ object Tables {
 
         }
     }
-//    class UserLikes : BaseColumns {
-//        companion object{
-//            const val TABLE_USERLIKES = "UserLikes"
-//            const val COLUMN_1 = "username"
-//            const
-//        }
-//    }
-
 }
 
