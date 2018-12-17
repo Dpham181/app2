@@ -69,7 +69,6 @@ class useractivity : AppCompatActivity() {
                 holder.holder_image.setImageDrawable(draw)
 
 
-
                 val stars = db.getStars(position+1)  // getting stars from db
 
                 // like buuton click then call db to get count of like in sqlite
@@ -147,6 +146,17 @@ class useractivity : AppCompatActivity() {
             R.id.Contact -> {
 
                 val intent =  Intent(this, ContactActivity::class.java)
+                startActivity(intent)
+
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+
+
+                true;
+            }
+
+            R.id.Location -> {
+
+                val intent =  Intent(this, location::class.java)
                 startActivity(intent)
 
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out)

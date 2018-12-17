@@ -32,18 +32,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".CreateMovieActivity"></activity>
         <activity
-            android:name=".CreateMovieActivity">
-
-        </activity>
-
-        <activity android:name=".ContactActivity"
+            android:name=".ContactActivity"
             android:parentActivityName=".useractivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".location"></activity>
     </application>
 
 </manifest>
